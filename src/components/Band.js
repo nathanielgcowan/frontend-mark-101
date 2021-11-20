@@ -5,7 +5,6 @@ const Band = (props) => {
         <div>
             <h3>{props.name}</h3>
             <p>{props.genre}</p>
-            <p>{props.rating}</p>
         </div>
     )
 }

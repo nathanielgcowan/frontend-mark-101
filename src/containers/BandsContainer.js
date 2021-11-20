@@ -30,7 +30,7 @@ class Bands extends Component {
         const listOfBands = this.props.bands.map((band) => {
             return (
                 <div key={band.id}>
-                    <Band name={band.name} genre={band.genre} rating={band.rating}/>
+                    <Band name={band.name} genre={band.genre} />
                     <button onClick={this.handleClick} value={band.id}>Delete</button>
                     <button onClick={this.handleLikeButtonClick} value={band.id}>Like</button>
                 </div> ); });
@@ -51,6 +51,4 @@ const mapStateToProps = (state) => ({
     bands: state.bands.bands,
 });
 
-export default connect(mapStateToProps, { fetchBands, deleteBand, likeButton })(
-    Bands
-);
+export default connect(mapStateToProps, { fetchBands, deleteBand, likeButton })( Bands );
