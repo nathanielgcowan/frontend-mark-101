@@ -1,6 +1,7 @@
-import { FETCH_BANDS, NEW_BAND } from './types';
+import { FETCH_BANDS, NEW_BAND, REMOVE_BAND, LIKE_BAND } from './types';
 
 export const newBand = bandData => dispatch => {
+    console.log(dispatch)
     fetch('http://localhost:3001/bands', {
         method: 'POST',
         headers: {
@@ -9,15 +10,58 @@ export const newBand = bandData => dispatch => {
         body: JSON.stringify(bandData)
     })
     .then(response => response.json())
-    .then(singular => dispatch({
-        type: NEW_BAND,
-        payload: singular
-    })
+    .then(singular => {
+        console.log(singular)
+        return dispatch({
+            type: NEW_BAND,
+            payload: singular
+        })
+    }
     );
 };
 
-export const fetchBands = () => dispatch => {
+export const fetchBands = (id) => dispatch => {
     fetch('http://localhost:3001/bands')
     .then(response => response.json())
     .then(plural => dispatch({ type: FETCH_BANDS, payload: plural }))
 }
+
+export const deleteBand = id => dispatch => {
+    console.log(dispatch)
+    fetch(`http://localhost:3001/bands/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({id})
+    })
+    .then(response => response.json())
+    .then(singular => {
+        console.log(singular)
+        return dispatch({
+            type: REMOVE_BAND,
+            payload: singular
+        })
+    }
+    );
+};
+
+export const likeButton = id => dispatch => {
+    console.log(dispatch)
+    fetch(`http://localhost:3001/bands/${id}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({id})
+    })
+    .then(response => response.json())
+    .then(singular => {
+        console.log(singular)
+        return dispatch({
+            type: LIKE_BAND,
+            payload: singular
+        })
+    }
+    );
+};

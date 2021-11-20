@@ -19,6 +19,7 @@ class BandForm extends Component {
 
     onSubmit(e) {
         e.preventDefault();
+        console.log(this.state)
         const band = {
             name: this.state.name,
             genre: this.state.genre

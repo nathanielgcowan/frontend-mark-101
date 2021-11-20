@@ -15,9 +15,9 @@ class App extends Component {
         <Header />
       </div>
         <Routes>
-          <Route path='/' element={<Bands />}/>
-          <Route path='/favorite-band' element={<FavoriteBand />}/>
-          <Route path='/least-favorite-band' element={<LeastFavoriteBand />}/>
+          <Route path='/bands' element={<Bands />} />
+          <Route path='bands/favorite-band' element={<FavoriteBand />}/>
+          <Route path='bands/least-favorite-band' element={<LeastFavoriteBand />}/>
           <Route path='/about' element={<About />}/>
         </Routes>
       </Router>
