@@ -1,4 +1,4 @@
-import { FETCH_BANDS, NEW_BAND, REMOVE_BAND, UPDATE_BAND } from '../actions/types';
+import { FETCH_BANDS, LIKE_BAND, NEW_BAND, REMOVE_BAND, UPDATE_BAND } from '../actions/types';
 
 const initialState = {
     bands: []
@@ -8,7 +8,7 @@ const initialState = {
 function bandsReducer(state = initialState, action) {
     switch(action.type) {
         case FETCH_BANDS:
-            console.log(action.payload);
+            // console.log(action.payload);
             const listofbands = action.payload;
             return { ...state, bands: listofbands };
         case NEW_BAND:
@@ -30,7 +30,12 @@ function bandsReducer(state = initialState, action) {
             updatedlist.push(action.payload)
             //return updated state
             return { ...state, bands:updatedlist}
-
+        case LIKE_BAND:
+            let list = state.bands.filter(e=>{
+                return e.likes
+            })
+            console.log(list)
+            return { ...state, bands: list }
         default:
             return state;
     }

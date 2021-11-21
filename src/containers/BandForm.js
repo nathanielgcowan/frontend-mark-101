@@ -8,7 +8,8 @@ class BandForm extends Component {
         super(props)
         this.state ={
             name: '',
-            genre: ''
+            genre: '',
+            likes: ''
         };
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -22,7 +23,8 @@ class BandForm extends Component {
         console.log(this.state)
         const band = {
             name: this.state.name,
-            genre: this.state.genre
+            genre: this.state.genre,
+            likes: this.state.likes
         };
         this.props.newBand(band);
         console.log(band)

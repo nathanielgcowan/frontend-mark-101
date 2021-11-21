@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { fetchBands, deleteBand, likeButton } from "../actions/bandActions";
 import BandForm from "./BandForm";
+import { Link } from 'react-router-dom';
 import Band from '../components/Band';
 
 class Bands extends Component {
@@ -10,29 +11,24 @@ class Bands extends Component {
         this.props.fetchBands();
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.newBand) {
-            this.props.bands.unshift(nextProps.newBand);
-        }
-    }
-
     handleClick = (event) => {
         this.props.deleteBand(event.target.value);
     };
 
-    handleLikeButtonClick = (event) => {
+    handleUpvote = (event) => {
         this.props.likeButton(event.target.value);
     };
 
     render() {
-        console.log(this.props);
-        console.log(this.props.bands);
+        console.log(this.props)
         const listOfBands = this.props.bands.map((band) => {
             return (
                 <div key={band.id}>
-                    <Band name={band.name} genre={band.genre} />
-                    <button onClick={this.handleClick} value={band.id}>Delete</button>
-                    <button onClick={this.handleLikeButtonClick} value={band.id}>Like</button>
+                    <Link to={`/bands/${band.id}`}>
+                        <Band name={band.name} genre={band.genre} likes={band.likes}/>
+                        <button onClick={this.handleClick} value={band.id}>Delete</button>
+                        <button onClick={this.handleUpvote} value={band.id}>Like</button>
+                    </Link>
                 </div> ); });
         return (
             <div>
