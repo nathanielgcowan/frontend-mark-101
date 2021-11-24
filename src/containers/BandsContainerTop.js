@@ -1,12 +1,15 @@
-import { Outlet } from 'react-router-dom'
+import React from "react";
+import { Outlet } from "react-router-dom";
 
-const BandsContainerTop = () => {
-    return (
-        <div> 
-            <h1>Bands</h1>
-            <Outlet />
-        </div>
-    )
+function BandsContainerTop() {
+  return (
+    <div className="home">
+      <div className="container">
+        <h1 className="text-center mt-5">Band page</h1>
+        <Outlet />
+      </div>
+    </div>
+  );
 }
 
 export default BandsContainerTop;

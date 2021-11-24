@@ -4,40 +4,39 @@ import { connect } from "react-redux";
 import { fetchBands, deleteBand, likeButton } from "../actions/bandActions";
 import BandForm from "./BandForm";
 import { Link } from 'react-router-dom';
-import Band from '../components/Band';
+import BandCard from "../components/BandCard";
 
-class Bands extends Component {
+class BandsContainer extends Component {
     componentDidMount() {
         this.props.fetchBands();
     }
-
+    
     handleClick = (event) => {
         this.props.deleteBand(event.target.value);
     };
-
+    
     handleUpvote = (event) => {
         this.props.likeButton(event.target.value);
     };
-
-    render() {
-        console.log(this.props)
-        const listOfBands = this.props.bands.map((band) => {
-            return (
-                <div key={band.id}>
-                    <Link to={`/bands/${band.id}`}>
-                        <Band name={band.name} genre={band.genre} likes={band.likes}/>
-                        <button onClick={this.handleClick} value={band.id}>Delete</button>
-                        <button onClick={this.handleUpvote} value={band.id}>Like</button>
-                    </Link>
-                </div> ); });
-        return (
+    
+    render(){
+        return(
             <div>
-                <BandForm />
-                {listOfBands}
+                <Link to={}>Add New</Link>
+                {this.props.bands.map(b=>{
+                    return(
+                        <div style={{border:'1px solid black'}}>
+                            <h1>{b.name}</h1>
+                            <p>{b.genre}</p>
+                        </div>
+                    )
+                })}
             </div>
-        ); } }
+        );
+    }
+}
 
-Bands.propTypes = {
+BandsContainer.propTypes = {
     fetchBands: PropTypes.func.isRequired,
     bands: PropTypes.array.isRequired,
     newBand: PropTypes.func,
@@ -47,4 +46,4 @@ const mapStateToProps = (state) => ({
     bands: state.bands.bands,
 });
 
-export default connect(mapStateToProps, { fetchBands, deleteBand, likeButton })( Bands );
+export default connect(mapStateToProps, { fetchBands, deleteBand, likeButton })( BandsContainer );

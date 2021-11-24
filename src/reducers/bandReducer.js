@@ -31,14 +31,14 @@ function bandsReducer(state = initialState, action) {
             //return updated state
             return { ...state, bands:updatedlist}
         case LIKE_BAND:
-            let list = state.bands.filter(e=>{
-                return e.likes
+            const lot = state.bands.filter(e=>{
+                return e.id === action.payload.id
             })
-            console.log(list)
-            return { ...state, bands: list }
+            console.log(lot)
+            return { ...state, bands: lot }
         default:
             return state;
     }
 }
 
-export default  bandsReducer;
+export default bandsReducer;
